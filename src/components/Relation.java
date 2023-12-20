@@ -48,4 +48,21 @@ public class Relation {
             System.out.println(" -> "+this.attributs.get(i).getType());
         }
     }
+
+/// DATA FETCH
+
+    /* Getting a Domaine by his name*/
+    public Domaine getDomaineByName(String domName)throws Exception{
+        Domaine dResult = null;
+        Vector<Domaine> lsDomaines = this.getAttributs();
+        for(int i=0; i<lsDomaines.size(); i++){
+            Domaine d = lsDomaines.get(i);
+            if(d.getNom().equals(domName)){
+                dResult = d;
+                break; 
+            }
+        }
+        if(dResult == null)throw new Exception("Tsy nahitana daomanina ny anarana "+domName+" izay nampidirina");
+        return dResult;
+    }
 }
