@@ -1,0 +1,25 @@
+
+CREATION :
+    mamorona databazy NOM
+    manamboara fifandraisana NOM [nom:type, nom:type]
+
+INSERTION : 
+    ampidiro [data] anaty [Fifandraisana]
+
+PROJECTION 
+    alaivo [colonne] anaty [Fifandraisana]
+
+SELECTION 
+    alaivo [colonne] anaty [Fifandraisana] rehefa [Condition]
+    
+PRODUIT CARTESIEN 
+    ampifampitomboy fifandaisana [Fifandraisana1] sy [Fifandraisana2]
+
+JOINTURE NATURELLE
+    ampifandraiso fifandaisana [Fifandraisana1] sy [Fifandraisana2]
+
+EQUJOINTURE 
+    ampifandraiso fifandaisana [Fifandraisana1] sy [Fifandraisana2] rehefa [Domaine1]=[Domaine2]
+
+
+

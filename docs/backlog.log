@@ -1,0 +1,63 @@
+Classe : 
+    - Domaine (nom, type)
+    - Relation (nom, Domaine[])
+    - Element (relation, listeValeur)
+    - Analyzer ( )
+    - Test ()
+    - Database ( nom, Relation[])
+    - Query ( )
+    - Fonction ( )
+    - Data ( )
+
+** Domaine 
+    - getters and setters + Exception
+
+** Relation
+    - getters et setters + Exception
+    - getAllElements
+    - insert(String[] data)
+    - getDomaineByName(String)
+    - description
+    - printTable();
+
+** Element
+    - getters and setters + Exception
+    - creationElement(Relation,Data)
+    - getValues()
+    - getValus(Domaine)
+    - Verify(Condition)
+
+** Analyzer 
+    - isAnExistantDomain(Domaine)
+    - escapeCharacter(str)
+    - isDomainOf(Relation, nomDomaine)
+    - getActionType + Exception
+    - getActionCibleName + Exception
+    - getData + Exception
+
+** Condition 
+
+** Request 
+    - execute()
+** Query 
+    - execute + Exception
+    - prompt
+
+
+** Operators 
+    - getters and setters + Exception
+    - print_table
+    - creerRelation(nom,attribut[] , type[])
+    - union(relation1,relation2)
+    - intersection(relation1,relation2)
+    - difference(relation1,relation2)
+    - selection(relation,predicat[])
+    - projection(relation,predicat[])
+    - produitCartesien(relation,relation)
+    - jointureNaturelle(relation,relation,predicat)
+    - equijointure(Relation r1, Relation r2, Domaine d1, Domaine d2)
+
+
+** Data
+    - save(table)
+    - load(relation)
