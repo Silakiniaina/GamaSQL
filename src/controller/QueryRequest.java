@@ -23,7 +23,7 @@ public class QueryRequest {
                 execute(userInput);
             }
         }catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }finally{
             prompt();
         }
@@ -44,6 +44,13 @@ public class QueryRequest {
             String[] data = QueryController.splitRequest(request)[1].substring(QueryController.splitRequest(request)[1].indexOf("[")+1, QueryController.splitRequest(request)[1].lastIndexOf("]")).split(",");
             Relation r = Data.loadRelation("null", relName);
             r.insert(data);
+        }else if(actionType.equals("fangalana")){
+            String data = QueryController.splitRequest(request)[1];
+            String relName = QueryController.splitRequest(request)[3];
+            if(data.equalsIgnoreCase("*")){
+                Relation r = Data.loadRelation("null", relName);
+                r.printTable(r.getAttributs());
+            }
         }
     }
 }

@@ -7,12 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSerializer;
-import com.google.gson.stream.JsonReader;
 
 public class Data {
     public static void createBase(String baseName){
@@ -40,6 +34,7 @@ public class Data {
         if(f.exists()){
             ObjectInputStream o = new ObjectInputStream(new FileInputStream(f));
             res = (Relation)o.readObject();
+            System.out.println("azo izay nilaina");
         }else throw new Exception("Tsy misy ny fifandraisana mitondra ny anarana : "+relName+" ao anatin'ny databazy "+baseName);
         return res;
     }
