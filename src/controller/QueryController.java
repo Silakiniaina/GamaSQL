@@ -83,14 +83,14 @@ public class QueryController {
         if(req.equalsIgnoreCase("mamorona")) result = "famoronana";
         else if(req.equalsIgnoreCase("manamboara")) result = "fanamboarana";
         else if(req.equalsIgnoreCase("alaivo"))result = "fangalana";
-        else if(req.equalsIgnoreCase("fampidirana")) result = "fampidirana";
+        else if(req.equalsIgnoreCase("ampidiro")) result = "fampidirana";
         else if(req.equalsIgnoreCase("ampifampitomboy")) result = "fampitomboana";
         else if(req.equalsIgnoreCase("ampifandraiso")) result = "fampifandraisana";
         else throw new Exception("Fangatahana tsy fantatra ny fangatahana *"+req+" izay tafiditra");
         return result;
     }
 
-    /* getting the name of the relation or the database from the request */
+    /* getting the name of the relation or the database to create from the request */
     public static String getNomCreation(String request)throws Exception{
         String nom = QueryController.splitRequest(request)[2];
         if(nom == null || nom.trim() == "" ){

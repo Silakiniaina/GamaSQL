@@ -27,6 +27,7 @@ public class Creator {
         }
         Relation result = new Relation(nom, listeDomaine);
         System.out.println("Fifandraisana "+nom+" voaforona");
+        Data.saveRelation(result);
         return result;
     }
 

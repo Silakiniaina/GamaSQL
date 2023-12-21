@@ -1,23 +1,35 @@
 package components;
 
+import java.io.Serializable;
 import java.util.Vector;
 import controller.QueryController;
 
-public class Relation {
+public class Relation implements Serializable{
+    String baseName;
     String RELATION_NAME;
     Vector<Domaine> attributs;
+    Vector<Element> elements; 
     
     /* Constructors */
     public Relation(String name, Vector<Domaine> listeDomaine)throws Exception{
+        elements = new Vector<Element>();
         this.setNomRelation(name);
         this.setAttribut(listeDomaine);
+
     }
+
     /* Getters */
     public String getNomRelation(){
         return this.RELATION_NAME;
     }
     public Vector<Domaine> getAttributs(){
         return this.attributs;
+    }
+    public Vector<Element> getElements(){
+        return this.elements;
+    }
+    public String getBaseName(){
+        return this.baseName;
     }
 
     /* Setters */
@@ -38,6 +50,17 @@ public class Relation {
             this.attributs = domaine;
         }
     }
+    public void setElements(Vector<Element> e){
+        this.elements = e;
+    }
+    public void setBaseName(String bn) throws Exception{
+         if(bn == null || bn.trim() == ""){
+            Exception e = new Exception("Tsy azo atao foana na tsy misy ny anarana databazina fifandraisana ");
+            throw e;
+        }
+        QueryController.escapeCharacter(bn);
+        this.baseName = bn;
+    }
 
     /* Description */
     public void desc(){
@@ -49,8 +72,15 @@ public class Relation {
         }
     }
 
-/// DATA FETCH
+/// DATA INSERTION 
+    /* Inserting data in the relation */
+    public void insert(String[] elements)throws Exception{
+        Element e = new Element(this,elements);
+        this.getElements().add(e);
+        Data.saveRelation(this);
+    }
 
+/// DATA FETCH
     /* Getting a Domaine by his name*/
     public Domaine getDomaineByName(String domName)throws Exception{
         Domaine dResult = null;

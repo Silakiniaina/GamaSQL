@@ -2,6 +2,8 @@ package controller;
 
 import java.util.Scanner;
 
+import components.Data;
+import components.Relation;
 import shared.Creator;
 import shared.Function;
 
@@ -10,15 +12,20 @@ public class QueryRequest {
     /* Reading the client's request */
     public static void prompt()throws Exception{
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Tongasoa _GamaSQL_");
-        while (true) {
-            System.out.print("_Gama >");
-            String userInput = scanner.nextLine();
-            if (userInput.equalsIgnoreCase("hiala")) {
-                System.out.println("Veloma ;)");
-                break;
+        try {
+            while (true) {
+                System.out.print("_Gama >");
+                String userInput = scanner.nextLine();
+                if (userInput.equalsIgnoreCase("hiala")) {
+                    System.out.println("Veloma ;)");
+                    break;
+                }
+                execute(userInput);
             }
-            execute(userInput);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally{
+            prompt();
         }
     }
 
@@ -32,6 +39,11 @@ public class QueryRequest {
         }else if(actionType.equals("famoronana")){
             String nomBase = QueryController.getNomCible(request);
             Creator.database(nomBase);
+        }else if(actionType.equals("fampidirana")){
+            String relName = QueryController.splitRequest(request)[3];
+            String[] data = QueryController.splitRequest(request)[1].substring(QueryController.splitRequest(request)[1].indexOf("[")+1, QueryController.splitRequest(request)[1].lastIndexOf("]")).split(",");
+            Relation r = Data.loadRelation("null", relName);
+            r.insert(data);
         }
     }
 }

@@ -1,8 +1,10 @@
 package components;
 
+import java.io.Serializable;
+
 import controller.QueryController;
 
-public class Domaine{
+public class Domaine implements Serializable{
     String nom;
     String type;
 
