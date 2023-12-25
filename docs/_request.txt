@@ -6,6 +6,15 @@ CREATION :
 INSERTION : 
     ampidiro [data] anaty [Fifandraisana]
 
+UNION : 
+    alaivo fitambarana [fifandraisana] sy [fifandraisana2]
+
+INTERSECTION : 
+    alaivo fitoviana [Fifandraisana1] sy [fifandraisana2]
+
+DIFFERENCE : 
+    alaivo fahasamihafana [Fifandraisana1] sy [Fifandraisana2]
+
 PROJECTION 
     alaivo [colonne] anaty [Fifandraisana]
 

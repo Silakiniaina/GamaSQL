@@ -2,7 +2,11 @@ package components;
 
 import java.io.Serializable;
 import java.util.Vector;
+
+import com.google.gson.Gson;
+
 import controller.QueryController;
+import shared.Function;
 
 public class Relation implements Serializable{
     String baseName;
@@ -80,6 +84,14 @@ public class Relation implements Serializable{
         Data.saveRelation(this);
     }
 
+    /* inserting multiple elements in the relation */
+    public void insertAll(Vector<Element> e){
+        for(int i=0; i<e.size(); i++){
+            Element elem = e.get(i);
+            this.getElements().add(elem);
+        }
+    }
+
 /// DATA FETCH
     /* Getting a Domaine by his name*/
     public Domaine getDomaineByName(String domName)throws Exception{
@@ -103,6 +115,72 @@ public class Relation implements Serializable{
             Element e = this.getElements().get(i);
             result.add((String)e.getListeValeur().get(d.getNom()));
         }   
+        return result;
+    }
+
+    /* all domains names of the relation */
+    public String[] getAttributesName(){
+        String[] result = new String[this.getAttributs().size()];
+        for(int i=0; i<this.getAttributs().size(); i++){
+            result[i] = this.getAttributs().get(i).getNom();
+        }
+        return result;
+    }
+
+/// DATA MANIPULATION 
+    /* extracts doublons */
+    public void extractDoublon(){
+        Vector<Element> lsElement = this.getElements();
+        for(int i=0; i<lsElement.size(); i++){
+            Element e = lsElement.get(i);
+            for(int j= i+1; j<lsElement.size(); j++){
+                Element e1 = lsElement.get(j);
+                if(e.equals(e1)){
+                    lsElement.remove(j);
+                }
+            }
+        }
+    }
+
+/// OPERATIONS 
+    /* Union */
+    public Relation union(Relation anotherRelation)throws Exception{
+        if(this.getAttributs().size() != anotherRelation.getAttributs().size()) throw new Exception("Tsy maintsy mitovy ny isan'ny daomanina anaty fifandraisana roa hoan'ny kajy fakana fitambarana");
+        Relation result = new Relation("UNION_"+this.getNomRelation()+"_"+anotherRelation.getNomRelation(), Function.generateDomains(this.getAttributesName()));
+        result.insertAll(this.getElements());
+        result.insertAll(anotherRelation.getElements());
+        result.extractDoublon();
+        return result;
+    }
+
+    /* intersection */
+    public Relation intersection(Relation anotherRelation)throws Exception{
+        if(this.getAttributs().size() != anotherRelation.getAttributs().size()) throw new Exception("Tsy maintsy mitovy ny isan'ny daomanina anaty fifandraisana roa hoan'ny kajy fakana fitoviana");
+        Gson g = new Gson();
+        Relation result = new Relation("INTERSECTION_"+this.getNomRelation()+"_"+anotherRelation.getNomRelation(), Function.generateDomains(this.getAttributesName()));
+        for(int i=0; i<this.getElements().size(); i++){
+            for(int j=0; j<anotherRelation.getElements().size(); j++){
+                if(g.toJson(this.getElements().get(i).getValues(this)).equals(g.toJson(anotherRelation.getElements().get(j).getValues(anotherRelation)))){
+                    result.insert(this.getElements().get(i).getValues(this));
+                }
+            }
+        }
+        return result;
+    }
+
+    /* difference */
+    public Relation difference(Relation anotherRelation)throws Exception{
+        if(this.getAttributs().size() != anotherRelation.getAttributs().size()) throw new Exception("Tsy maintsy mitovy ny isan'ny daomanina anaty fifandraisana roa hoan'ny kajy fanalana fitoviana");
+        Gson g = new Gson();
+        Relation result = new Relation("DIFFERENCE_"+this.getNomRelation()+"_"+anotherRelation.getNomRelation(), Function.generateDomains(this.getAttributesName()));
+        result.insertAll(this.getElements());
+        for(int i=0; i<result.getElements().size(); i++){
+            for(int j=0; j<anotherRelation.getElements().size(); j++){
+                if(g.toJson(result.getElements().get(i).getValues(result)).equals(g.toJson(anotherRelation.getElements().get(j).getValues(anotherRelation)))){
+                    result.getElements().remove(result.getElements().get(i));
+                }
+            }
+        }
         return result;
     }
 

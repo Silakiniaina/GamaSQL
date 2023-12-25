@@ -1,56 +1,51 @@
 Classe : 
-    - Domaine (nom, type)
-    - Relation (nom, Domaine[])
-    - Element (relation, listeValeur)
-    - Analyzer ( )
-    - Test ()
-    - Database ( nom, Relation[])
-    - Query ( )
-    - Fonction ( )
-    - Data ( )
+    - (OK) Domaine (nom, type)
+    - (OK) Relation (nom, Domaine[])
+    - (OK) Element (relation, listeValeur)
+    - (OK) QueryRequest ( )
+    - (OK) Test ()
+    - (OK) Database ( nom, Relation[])
+    - (OK) QueryController ( )
+    - (OK) Function ( )
+    - (OK) Data ( )
+    - (OK) Creator()
+    - (OK) Operator ( )
 
 ** Domaine 
-    - getters and setters + Exception
+    - (OK) getters and setters + Exception
 
 ** Relation
-    - getters et setters + Exception
-    - getAllElements
-    - insert(String[] data)
+    - (OK) getters et setters + Exception
+    - (OK) getAllElements
+    - (OK) insert(String[] data)
     - getDomaineByName(String)
-    - description
-    - printTable();
+    - (OK) description
+    - (OK) printTable();
 
 ** Element
-    - getters and setters + Exception
-    - creationElement(Relation,Data)
-    - getValues()
-    - getValus(Domaine)
+    - (OK) getters and setters + Exception
+    - (OK) creationElement(Relation,Data)
+    - (OK) getValues()
+    - (OK) getValus(Domaine)
     - Verify(Condition)
 
-** Analyzer 
-    - isAnExistantDomain(Domaine)
-    - escapeCharacter(str)
-    - isDomainOf(Relation, nomDomaine)
-    - getActionType + Exception
-    - getActionCibleName + Exception
-    - getData + Exception
+** QueryController 
+    - (OK) isAnExistantDomain(Domaine)
+    - (OK) escapeCharacter(str)
+    - (OK) isDomainOf(Relation, nomDomaine)
+    - (OK) getActionType + Exception
+    - (OK) getActionCibleName + Exception
+    - (OK) getData + Exception
 
-** Condition 
-
-** Request 
-    - execute()
-** Query 
-    - execute + Exception
-    - prompt
-
+** QueryRequest 
+    - (OK) execute + Exception
+    - (OK) prompt
 
 ** Operators 
-    - getters and setters + Exception
-    - print_table
-    - creerRelation(nom,attribut[] , type[])
-    - union(relation1,relation2)
-    - intersection(relation1,relation2)
-    - difference(relation1,relation2)
+    - (OK) getters and setters + Exception
+    - (OK) union(relation1,relation2)
+    - (OK) intersection(relation1,relation2)
+    - (OK) difference(relation1,relation2)
     - selection(relation,predicat[])
     - projection(relation,predicat[])
     - produitCartesien(relation,relation)
@@ -59,5 +54,6 @@ Classe :
 
 
 ** Data
-    - save(table)
-    - load(relation)
+    - (OK) saveRelation(table)
+    - (OK) loadRelation(relation)
+    - (OK) saveRequest(request)

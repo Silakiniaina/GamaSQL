@@ -1,0 +1,9 @@
+manamboara fifandraisana A [col1:isa,col2:soratra,col3:isa]
+ampidiro [1,A,3] anaty A
+ampidiro [2,B,5] anaty A
+ampidiro [3,C,7] anaty A
+manamboara fifandraisana B [col1:isa,col2:soratra,col3:isa]
+ampidiro [1,C,7] anaty B
+ampidiro [2,X,4] anaty B
+ampidiro [3,Y,2] anaty B
+
