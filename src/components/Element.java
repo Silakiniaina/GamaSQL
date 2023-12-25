@@ -21,10 +21,10 @@ public class Element implements Serializable{
         return listeValeur;
     }
     public String[] getValues(Relation r){
-        String[] result = new String[this.getListeValeur().size()];
+        String[] result = new String[r.getAttributs().size()];
         HashMap<String,String> ls = getListeValeur();
         Vector<Domaine> lsDom = r.getAttributs();
-        for(int i=0; i<ls.size(); i++){
+        for(int i=0; i<lsDom.size(); i++){
             result[i] = (ls.get(lsDom.get(i).getNom()));
         }
         return result;
@@ -44,5 +44,10 @@ public class Element implements Serializable{
                 listeValeur.put(lsDom.get(i).getNom(), ls[i]);
             }
         }
+    }
+
+    /* getting new Element by an array of domname */
+    public Element getElement(Relation r) throws Exception{
+        return new Element(r, this.getValues(r));
     }
 }

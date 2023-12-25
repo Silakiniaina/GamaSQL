@@ -94,7 +94,7 @@ public class Relation implements Serializable{
 
 /// DATA FETCH
     /* Getting a Domaine by his name*/
-    public Domaine getDomaineByName(String domName)throws Exception{
+    private Domaine getDomaineByName(String domName)throws Exception{
         Domaine dResult = null;
         Vector<Domaine> lsDomaines = this.getAttributs();
         for(int i=0; i<lsDomaines.size(); i++){
@@ -106,6 +106,16 @@ public class Relation implements Serializable{
         }
         if(dResult == null)throw new Exception("Tsy nahitana daomanina ny anarana "+domName+" izay nampidirina");
         return dResult;
+    }
+
+    /* getting list of domains by an array of domName */
+    public Vector<Domaine> getDomaineByArrayName(String[] domName) throws Exception{
+        Vector<Domaine> result = new Vector<Domaine>();
+        for(int i=0; i<domName.length; i++){
+            Domaine d = this.getDomaineByName(domName[i]);
+            result.add(d);
+        }
+        return result;
     }
 
     /* allElement of a domain */
@@ -184,9 +194,19 @@ public class Relation implements Serializable{
         return result;
     }
 
+    /* Projection */
+    public Relation projection(String[] colNames)throws Exception{
+        Relation result = new Relation("PROJECTION_"+this.getNomRelation(), this.getDomaineByArrayName(colNames));
+        for(int i=0; i<this.getElements().size(); i++){
+            Element e = this.getElements().get(i).getElement(result);
+            result.getElements().add(e);
+        }
+        return result;
+    }
+
 /// PRINT TABLE 
     /* getting the max length of charcter */
-    public int getMaxCharacter(Vector<String> text){
+    private int getMaxCharacter(Vector<String> text){
         int count = -1;
         for(int i=0; i<text.size(); i++){
             String mot = text.get(i);
@@ -195,7 +215,7 @@ public class Relation implements Serializable{
         return count+2;
     }
     /* getting limit of each columns */
-    public String getLimit(int count){
+    private String getLimit(int count){
         String result = "";
         for(int i=0; i<=count + 1; i++){
             if(i== count+1)result += "+";
@@ -204,7 +224,7 @@ public class Relation implements Serializable{
         return result;
     }
     /* adjusting all elements in each columns */
-    public String ajust(String mot, int max){
+    private String ajust(String mot, int max){
         int separator = Math.round((max-mot.length())/2) + 1;
         String left = "", right = "";
         double taille = separator  + mot.length() + separator;
@@ -219,11 +239,11 @@ public class Relation implements Serializable{
     }
 
     /* printing the relation  */
-    public void printTable(Vector<Domaine> lsDomaine){
+    public void printTable(){
         Vector<String> content = new Vector<String>();
         String titre = "", limiteTitre = "";
-        for(int i=0; i<lsDomaine.size(); i++){
-            Domaine d = lsDomaine.get(i);
+        for(int i=0; i<this.getAttributs().size(); i++){
+            Domaine d = this.getAttributs().get(i);
             Vector<String> contenu = getAllElement(d);
             Vector<String> all = getAllElement(d);
             all.add(d.getNom());

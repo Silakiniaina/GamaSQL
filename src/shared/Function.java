@@ -47,4 +47,16 @@ public class  Function {
         }
          return result;
     }
+
+    /* verifying if an array of string contains a string */
+    public static boolean contains(Object[] ls, Object o){
+        boolean result = false; 
+        for(int i=0; i<ls.length; i++){
+            if(ls[i].equals(o)){
+                result = true; 
+                break;
+            }
+        }
+        return result;
+    }
 }
